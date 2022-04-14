@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap/bootstrap.css}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/static/admin.css}"/>
+    <title>Hello, world!</title>
+</head>
+<body>
+<header th:insert="blocks/admin-header.html :: header"></header>
+<div class="d-flex flex-row">
+    <div th:insert="blocks/admin-navigation.html :: navigation"></div>
+    <main role="main" class="container-fluid">
+        <div class="container-fluid p-3 border bg-light rounded">
+            <div>
+                <h4>User</h4>
+            </div>
+            <hr>
+            <form th:action="${id == null ? 'admin/users/create' : 'admin/users/edit/' + id}" th:method="post" th:object="${request}">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="login" aria-describedby="emailHelp" placeholder="Enter name" th:value="${request.getLogin()}">
+                </div>
+                <div class="form-group">
+                    <label for="name">Roles</label>
+                    <select class="mul-select form-select" name="role">
+                        <option th:each="role : ${roles}" th:value="${role}" th:text="${role}" th:selected="${request.getRoles() != null ? request.getRoles().equals(role) : false}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Password</label>
+                    <input type="password" class="form-control" id="password" name="replyPassword" aria-describedby="emailHelp" placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                    <label for="name">Reply password</label>
+                    <input type="password" class="form-control" id="replyPassword" name="replyPassword" aria-describedby="emailHelp" placeholder="Reply password">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </main>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

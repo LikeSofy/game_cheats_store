@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/static/style.css}"/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap/bootstrap.css}">
+
+    <title>Store</title>
+</head>
+<body>
+<header th:insert="blocks/header.html :: header"></header>
+    <main role="main" class="container">
+        <h1 th:text="${productsGroup.getName()}"></h1>
+        <p th:text="${productsGroup.getDescription()}">Quickly and easily get started with Bootstrap's compiled, production-ready files with this barebones example featuring some basic HTML and helpful links. Download all our examples to get started.</p>
+        <div class="mb-5">
+        <form th:action="${'/product-groups/' + id}" th:method="post" th:object="${request}">
+            <div class="form-group">
+                <label for="productId">Products</label>
+                <select id="productId" class="mul-select form-select" th:field="*{productId}">
+                    <option th:each="product : ${productsGroup.getProducts()}"
+                            th:value="${product.getId()}"
+                            th:text="${product.getName() + ' - ' + product.getPrice() + '$'}"></option>
+                </select>
+            </div>
+            <div th:if="${error}" class="alert alert-danger" role="alert" th:utext="${error}"></div>
+            <button type="submit" class="btn btn-primary btn-lg mt-2">Buy</button>
+        </form>
+        </div>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

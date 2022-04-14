@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap/bootstrap.css}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/static/admin.css}"/>
+    <title>Hello, world!</title>
+</head>
+<body>
+<header th:insert="blocks/admin-header.html :: header"></header>
+<div class="d-flex flex-row">
+    <div th:insert="blocks/admin-navigation.html :: navigation"></div>
+    <main role="main" class="container-fluid">
+        <div class="container-fluid p-3 border bg-light rounded">
+            <div>
+                <h4>Product</h4>
+            </div>
+            <hr>
+            <div th:if="${error}" class="alert alert-danger" role="alert" th:utext="${error}"></div>
+            <div th:if="${info}" class="alert alert-primary" role="alert" th:utext="${info}"></div>
+            <form th:action="${id == null ? '/admin/product-groups/create' : '/admin/product-groups/edit/' + id}" th:method="post" th:object="${request}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" th:value="${request.getName()}">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="textarea" class="form-control" id="description" name="description" placeholder="Enter description" th:value="${request.getDescription()}">
+                </div>
+                <div class="form-group">
+                    <label for="gameId">Game</label>
+                    <select id="gameId" class="mul-select form-select" th:field="*{gameId}">
+                        <option th:each="game : ${games}"
+                                th:value="${game.getId()}"
+                                th:text="${game.getName()}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="categoryId">Categories</label>
+                    <select id="categoryId" class="mul-select form-select" th:field="*{categoryId}">
+                        <option th:each="category : ${categories}"
+                                th:value="${category.getId()}"
+                                th:text="${category.getName()}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productsIds">Products</label>
+                    <select class="form-control selectpicker" id="productsIds" th:field="*{productsIds}" multiple>
+                        <option th:each="product : ${products}"
+                                th:value="${product.getId()}"
+                                th:text="${product.getName()}">
+                        </option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            </form>
+        </div>
+    </main>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<div th:fragment="navigation">
+    <div class="left-navbar flex-shrink-0 bg-white p-3" style="width: 200px;">
+        <ul class="list-unstyled ps-0">
+            <li class="mb-1">
+                <h5>Data control</h5>
+                <div class="collapse show">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a th:href="@{/admin/games}" class="link-dark rounded">Games</a></li>
+                        <li><a th:href="@{/admin/categories}" class="link-dark rounded">Categories</a></li>
+                        <li><a th:href="@{/admin/products}" class="link-dark rounded">Products</a></li>
+                        <li><a th:href="@{/admin/product-groups}" class="link-dark rounded">Products groups</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="mb-1">
+                <h5>User control</h5>
+                <div class="collapse show">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a th:href="@{/admin/users}" class="link-dark rounded">Users</a></li>
+                        <li><a th:href="@{/admin/sales}" class="link-dark rounded">Sales</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
